@@ -6,6 +6,7 @@ namespace WordleSolver.Search
     public readonly struct Guess
     {
         private readonly Word _guess;
+        private readonly (Word word, Match match)[] _givens;
         private readonly Dictionary<Match, List<Word>> _outcomes;
 
         public Guess(Word guess) : this(guess, new List<(Word word, Match match)>()) { }
@@ -14,10 +15,13 @@ namespace WordleSolver.Search
         {
             _guess = guess;
             _outcomes = new Dictionary<Match, List<Word>>();
+            _givens = given.ToArray();
             PopulateOutcomes(given);
         }
 
         public Word GuessedWord => _guess;
+
+        public IEnumerable<(Word word, Match match)> Givens => _givens;
 
         // 1 / WordCount = probability this guess is right
         public int WordCount => _outcomes.Values.Sum(l => l.Count);

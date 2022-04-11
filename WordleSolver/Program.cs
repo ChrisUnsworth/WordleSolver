@@ -1,12 +1,10 @@
 ﻿using WordleSolver.common;
 using WordleSolver.Search;
+using WordleSolver.Strategy;
 
-// See https://aka.ms/new-console-template for more information
 var start = DateTime.Now;
-Console.WriteLine("Building Node for TESTS.... wich me luck...");
 
-var node = BruteForce.FromFirstGuess(new Word("TESTS"));
+var result = Widest.GetStrategy();
 
-Console.WriteLine($"Wow that took {DateTime.Now - start}, good work everyone...");
+Console.WriteLine($"Wow that took {DateTime.Now - start} max depth = {Evaluator.MaxDepth(result)}");
 
- 
