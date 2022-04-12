@@ -124,5 +124,15 @@ namespace WordleSolverTests
 
             Assert.IsTrue(guess.Compatable((word, match)));
         }
+
+        [TestMethod]
+        public void ByteRoundTrip()
+        {
+            var stringWord = "APPLE";
+            var word = new Word(stringWord);
+            var bytes = word.ToByteArray();
+            var newWord = new Word(bytes);
+            Assert.AreEqual(stringWord, newWord.ToString());
+        }
     }
 }

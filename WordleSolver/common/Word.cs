@@ -36,6 +36,19 @@ namespace WordleSolver.common
             _value = intWord;
         }
 
+        public Word(IEnumerable<byte> word)
+        {
+            uint intWord = 0;
+
+            foreach (var b in word)
+            {
+                intWord <<= 8;
+                intWord |= b;
+            }
+
+            _value = intWord;
+        }
+
         public override string ToString()
         {
             var result = new StringBuilder();
@@ -69,6 +82,23 @@ namespace WordleSolver.common
             }
 
             return true;
+        }
+
+        public byte[] ToByteArray()
+        {
+            byte[] result;
+            unchecked
+            {
+                result = new byte[4] 
+                { 
+                    (byte)(_value >> 24),
+                    (byte)(_value >> 16),
+                    (byte)(_value >> 8),
+                    (byte)_value
+                };
+            }
+            
+            return result;
         }
 
         private IEnumerable<int> CompareEnumerable(Word guess)

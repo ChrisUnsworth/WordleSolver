@@ -11,8 +11,6 @@ namespace WordleSolver.Strategy
     {
         public static double MaxDepth(IStrategy strategy)
         {
-            if (!strategy.Options.Any()) { return 1; }
-
             double maxDepth = 0;
             foreach (var match in strategy.Options) 
             {
@@ -20,6 +18,25 @@ namespace WordleSolver.Strategy
             }
 
             return maxDepth + 1;
+        }
+
+        public static List<int> GetCounts(IStrategy strategy)
+        {
+            var counts = new List<int>() { 1 };
+
+            foreach (var match in strategy.Options)
+            {
+                var childCounts = GetCounts(strategy.Next(match));
+
+                while (childCounts.Count <= counts.Count) { counts.Add(0); }
+
+                foreach (var idx in Enumerable.Range(1, childCounts.Count))
+                {
+                    counts[idx] += childCounts[idx - 1];
+                }
+            }
+
+            return counts;
         }
     }
 }
