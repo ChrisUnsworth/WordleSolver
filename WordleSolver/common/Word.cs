@@ -49,13 +49,15 @@ namespace WordleSolver.common
             _value = intWord;
         }
 
+        public char this[int idx] => UintToLetter((_value >> (5 * idx)) & 31);
+
         public override string ToString()
         {
             var result = new StringBuilder();
 
             foreach (var idx in Enumerable.Range(0, 5))
             {
-                result.Append(UintToLetter((_value >> (5 * idx)) & 31));
+                result.Append(this[idx]);
             }
 
             return result.ToString();

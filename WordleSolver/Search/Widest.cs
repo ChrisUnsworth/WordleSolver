@@ -42,7 +42,7 @@ namespace WordleSolver.Search
 
         public static void Expand(ref Node node)
         {
-            foreach (var outcome in node.Guess.Outcomes.Where(p => p.Value.Count > 1))
+            foreach (var outcome in node.Guess.Outcomes.Where(p => !p.Key.AreEqual))
             {
                 var child = Expand(outcome, node.Guess);
                 node.Next.Add(outcome.Key, child);

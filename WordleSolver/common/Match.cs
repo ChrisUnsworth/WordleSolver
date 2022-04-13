@@ -16,6 +16,8 @@
             _match = match;
         }
 
+        public bool AreEqual => _match == 0B_1010101010;
+
         public Match(byte[] bytes)
         {
             ushort match = bytes[0];

@@ -30,6 +30,8 @@ namespace WordleSolverTests
             {
                 Assert.AreEqual(2, match[idx]);
             }
+
+            Assert.IsTrue(match.AreEqual);
         }
 
         [TestMethod]
@@ -46,6 +48,8 @@ namespace WordleSolverTests
             {
                 Assert.AreEqual(0, match[idx]);
             }
+
+            Assert.IsFalse(match.AreEqual);
         }
 
         [TestMethod]
@@ -63,6 +67,8 @@ namespace WordleSolverTests
             {
                 Assert.AreEqual(0, match[idx]);
             }
+
+            Assert.IsFalse(match.AreEqual);
         }
 
         [TestMethod]
